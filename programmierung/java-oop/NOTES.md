@@ -11,6 +11,9 @@
 - Quizantworten möglichst gleich lang formatiert, damit die richtige Antwort nicht durch Optik auffällt.
 - Jede Einheit in sich abgeschlossen (unregelmäßiges Zeitbudget).
 
+## Verlauf
+- 26.08.2026: Missionsinterview, Lektion 1 erstellt. Noch am selben Tag durchgearbeitet, Quiz weitgehend fehlerfrei (LR 0002).
+
 ## Offene Punkte
 - Bei der nächsten Session kurz abgleichen, welchen Abschnitt der Kurs gerade behandelt.
 - Noch ungeklärt: nutzt der Kurs den UML-Editor des Java-Editors aktiv? (Wirkt auf Diagramm-Aufgaben.)

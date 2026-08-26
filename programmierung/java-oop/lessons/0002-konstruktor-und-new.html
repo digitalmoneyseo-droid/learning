@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 2 · Konstruktor und new im Detail</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<article>
+  <p class="kicker">Java-OOP &middot; Lektion 2</p>
+  <h1>Konstruktor und <code>new</code>: was beim Erzeugen wirklich passiert</h1>
+
+  <p><strong>Warum diese Lektion?</strong> In Lektion 1 hast du <code>new</code> als
+  Zauberwort benutzt: Damit entstehen Objekte, fertig. Klausuraufgaben fragen hier
+  aber gern genauer nach: Welcher Konstruktor feuert bei welchem Aufruf, welche
+  Startwerte hat ein Attribut, wenn der Konstruktor es nicht anfasst, und warum
+  kompiliert auf einmal <code>new Konto()</code> nicht mehr? Nach dieser Lektion
+  kannst du all das beantworten, statt es zu raten.</p>
+
+  <h2>Abrufübung: Lektion 1, kalt</h2>
+  <p>Zwei Fragen aus dem Gedächtnis, ohne zurückzublättern. Genau dieses Kalterufen
+  macht den Stoff dauerhaft.</p>
+  <div class="quiz" data-quiz="warmup2"></div>
+
+  <script type="application/json" data-for="warmup2">
+  {
+    "title": "Warmup · Lektion 1",
+    "questions": [
+      {
+        "q": "<code>Konto a = new Konto(\"Kim\", 20);<br>Konto b = new Konto(\"Tim\", 30);<br>a.einzahlen(5);</code><br>Werte am Ende?",
+        "options": [
+          "a: 25, b: 30",
+          "a: 25, b: 35",
+          "a: 20, b: 30"
+        ],
+        "correct": 0,
+        "explainOk": "Sauber verfolgt: a bekam einzahlen(5), b wurde nie angerührt.",
+        "explainErr": "Ein new pro Objekt, ein Aufruf pro Ziel: Nur das Objekt hinter a ändert sich."
+      },
+      {
+        "q": "Warum passt „Die Klasse Konto besitzt 90 Euro“ nicht?",
+        "options": [
+          "Weil Werte im Objekt wohnen, nicht im Bauplan.",
+          "Weil Klassen keine Zahlen enthalten dürfen.",
+          "Weil Euro im Java-Editor unüblich sind."
+        ],
+        "correct": 0,
+        "explainOk": "Genau die Zwei-Blicke-Regel aus Lektion 1: Die Klasse beschreibt, jedes Objekt trägt seine Werte selbst.",
+        "explainErr": "Trenne Plan und Exemplar: Attribute legt die Klasse fest, Werte halten nur Objekte."
+      }
+    ]
+  }
+  </script>
+
+  <h2>Phase für Phase: was <code>new Konto("Kim", 20)</code> anrichtet</h2>
+  <p>Der Aufruf sieht wie ein Befehl aus, ist aber ein dreistufiger Vorgang.
+  Diese Stufen erkennst du in fast jeder Zustandsverfolgungs-Aufgabe wieder:</p>
+
+  <div class="example">
+    <span class="example-title">Die drei Phasen des Erzeugens</span>
+    <ul class="steps">
+      <li><strong>Platz.</strong> Java holt Speicher für ein neues Objekt der Klasse Konto an.<span class="why">ein new = ein neuer Speicherbereich</span></li>
+      <li><strong>Erstwerte.</strong> Jedes Attribut bekommt automatisch einen Nullwert: Zahlen 0 bzw. 0.0, boolean false, Objektreferenzen null.<span class="why">passiert vor allem anderen</span></li>
+      <li><strong>Konstruktorlauf.</strong> Der passende Konstruktor führt seine Zuweisungen aus und überschreibt Erstwerte durch echte Startwerte.<span class="why">Parameter landen in Attributen</span></li>
+    </ul>
+  </div>
+
+  <div class="merk">
+    <span class="merk-label">Merkkasten · Erstwerte</span>
+    Zwischen Phase 2 und 3 existiert das Objekt mit wertlosen Attributen:
+    <code>kontostand</code> wäre kurz 0.0 und <code>inhaber</code> wäre null.
+    Fasst der Konstruktor ein Attribut nicht an, bleibt genau dieser Nullwert
+    stehen. Genau deshalb kann eine Ausgabe später <code>null</code> lauten,
+    obwohl alles kompiliert.
+  </div>
+
+  <p>Phase 3 hat Regeln, denn nicht jeder Block im Klassentext ist ein Konstruktor.
+  Die nächsten zwei Abschnitte liefern die Spielregeln und die Falle dazu.</p>
+
+  <h2>Die Spielregeln des Konstruktors</h2>
+
+  <div class="merk">
+    <span class="merk-label">Spielregeln</span>
+    <ul style="margin:0.3rem 0 0;">
+      <li>Er heißt exakt wie die Klasse.</li>
+      <li>Er hat keinen Rückgabetyp, nicht einmal <code>void</code>.</li>
+      <li>Er läuft automatisch bei jedem <code>new</code>, man ruft ihn nie direkt auf.</li>
+      <li>Eine Klasse darf mehrere Konstruktoren haben, solange sich ihre
+      Parameterlisten unterscheiden. Das heißt <strong>Überladung</strong>,
+      englisch overloading.</li>
+    </ul>
+  </div>
+
+  <p>So sieht das bei deinem Konto aus. Kopier die Klasse in den
+  Java-Editor und probier beide Konstruktoren aus:</p>
+
+  <div class="codebox">
+    <span class="code-title">Konto.java &middot; jetzt mit Überladung</span>
+<pre><span class="kw">public class</span> <span class="ty">Konto</span> {
+
+    <span class="kw">private</span> <span class="ty">String</span> inhaber;
+    <span class="kw">private double</span> kontostand;
+
+    <span class="cm">// Konstruktor 1: Inhaber und Startbetrag</span>
+    <span class="kw">public</span> <span class="ty">Konto</span>(<span class="ty">String</span> neuerInhaber, <span class="kw">double</span> startbetrag) {
+        inhaber = neuerInhaber;
+        kontostand = startbetrag;
+    }
+
+    <span class="cm">// Konstruktor 2: nur ein Startbetrag, Inhaber offen</span>
+    <span class="kw">public</span> <span class="ty">Konto</span>(<span class="kw">double</span> startbetrag) {
+        kontostand = startbetrag;
+    }
+
+    <span class="kw">public void</span> einzahlen(<span class="kw">double</span> betrag) {
+        kontostand = kontostand + betrag;
+    }
+
+    <span class="kw">public</span> <span class="ty">String</span> getInhaber() { <span class="kw">return</span> inhaber; }
+    <span class="kw">public double</span> getKontostand() { <span class="kw">return</span> kontostand; }
+}</pre>
+  </div>
+
+  <div class="warnung">
+    <strong>Die Falle:</strong> Schreibst du für eine Klasse gar keinen Konstruktor,
+    spendiert Java einen unsichtbaren ohne Parameter. Schreibst du aber irgendeinen
+    selbst, ist dieser implizite weg. Hat deine Klasse nur
+    <code>Konto(String, double)</code>, dann kompiliert <code>new Konto()</code>
+    nicht mehr, weil kein passender Konstruktor für die leere Klammer existiert.
+    Diese Fehlermeldung siehst du sofort im Java-Editor.
+  </div>
+
+  <div class="example">
+    <span class="example-title">Wie Java den passenden Konstruktor wählt</span>
+    <ul class="steps">
+      <li><code>new Konto(&quot;Ada&quot;, 100)</code> → zwei Werte, String plus Zahl → Konstruktor 1 läuft.<span class="why">Parameterliste passt exakt</span></li>
+      <li><code>new Konto(75)</code> → eine Zahl → Konstruktor 2 läuft, inhaber bleibt null.<span class="why">drei Phasen, dann Lauf von Nr. 2</span></li>
+      <li><code>new Konto()</code> → kompiliert nicht, weil kein Konstruktor ohne Parameter existiert.<span class="why">impliziter wurde verdrängt</span></li>
+    </ul>
+  </div>
+
+  <h2>Blick voraus: wenn Parameter wie Attribute heißen</h2>
+
+  <div class="merk">
+    <span class="merk-label">Blick voraus · this</span>
+    Statt <code>neuerInhaber</code> darf ein Parameter auch schlicht
+    <code>inhaber</code> heißen. Dann sind zwei Namen gleich belegt und die
+    Zuweisung braucht <code>this.inhaber = inhaber;</code>: Links vom Punkt steht
+    das Attribut des entstehenden Objekts, rechts davon der Parameter. Ohne
+    <code>this</code> würde die Zeile nur den Parameter auf sich selbst zuweisen,
+    das Attribut bliebe null. Eigene Übungen dazu kommen in Lektion 3.
+  </div>
+
+  <h2>Schnelltest</h2>
+  <p>Vier Aufgaben, wieder aus dem Gedächtnis, Lektion-1-Stoff ist eingemischt.</p>
+  <div class="quiz" data-quiz="lektion2"></div>
+
+  <script type="application/json" data-for="lektion2">
+  {
+    "title": "Schnelltest · Lektion 2",
+    "questions": [
+      {
+        "q": "Welche Aussage über Konstruktoren stimmt?",
+        "options": [
+          "Sie heißen wie die Klasse und haben keinen Rückgabetyp.",
+          "Sie heißen wie das Objekt und haben keinen Rückgabetyp.",
+          "Sie heißen wie die Klasse und geben boolean zurück."
+        ],
+        "correct": 0,
+        "explainOk": "Name gleich Klassenname, nie ein Rückgabetyp, laufen automatisch beim new.",
+        "explainErr": "Merk dir das Paar: Klassenname als Name plus keine Rückgabe. main dagegen heißt main und liefert void."
+      },
+      {
+        "q": "<code>Konto k = new Konto(75);</code> mit den zwei Konstruktoren von oben.<br>Was gibt <code>System.out.println(k.getInhaber());</code> aus?",
+        "options": [
+          "Ausgabe: null",
+          "Ausgabe: 75",
+          "Fehler beim Kompilieren"
+        ],
+        "correct": 0,
+        "explainOk": "Konstruktor 2 setzt nur kontostand. inhaber blieb in Phase 2 beim Nullwert null, und der hält sich auf.",
+        "explainErr": "Phasen denken: Erstwerte gelten für alle Attribute, der Konstruktorlauf überschreibt nur, was er anfasst."
+      },
+      {
+        "q": "Klasse Stuhl hat nur den Konstruktor <code>Stuhl(String farbe)</code>.<br>Was passiert bei <code>Stuhl s = new Stuhl();</code>?",
+        "options": [
+          "Der Compiler meldet einen Fehler.",
+          "Ein Stuhl ohne Farbe entsteht.",
+          "farbe wird automatisch leer gesetzt."
+        ],
+        "correct": 0,
+        "explainOk": "Der implizite Konstruktor ohne Parameter verschwindet, sobald du selbst einen schreibst. Für () existiert dann nichts.",
+        "explainErr": "Die Falle aus der Lektion: Eigenes Konstruktorangebot verdrängt den unsichtbaren Standard. new Stuhl() findet keinen Partner mehr."
+      },
+      {
+        "q": "<code>k1 = new Konto(\"Bo\", 10); k1.einzahlen(40);<br>k2 = new Konto(90);</code><br>Welcher Stand gilt am Ende?",
+        "options": [
+          "k1: Bo/50 und k2: null/90",
+          "k1: Bo/50 und k2: Bo/90",
+          "k1: Bo/60 und k2: null/90"
+        ],
+        "correct": 0,
+        "explainOk": "k1 über Konstruktor 1 plus einzahlen auf 50, k2 über Konstruktor 2 mit offenem Inhaber.",
+        "explainErr": "Pro Objekt eine Spalte führen: Startwerte aus dem gewählten Konstruktor, dann nur die Aufrufe zählen, die genau dieses Objekt erreichten."
+      }
+    ]
+  }
+  </script>
+
+  <h2>Weiterlernen</h2>
+  <p><strong>Primärquelle zum Vertiefen (10 Min):</strong> Das Kapitel
+  <a href="https://de.wikibooks.org/wiki/Java_Standard#Objektorientierung">Klassen im Wikibook Java Standard</a>
+  zeigt Konstruktoren und Überladung an weiteren Beispielen. Maßgeblicher
+  englischer Gegenpol bleibt die
+  <a href="https://docs.oracle.com/javase/tutorial/java/concepts/">Oracle-OOP-Lektion</a>.
+  Praktische Hausaufgabe im <a href="https://javaeditor.org">Java-Editor</a>:
+  Bau absichtlich den Fehler herbei, also <code>new Konto()</code> gegen die neue
+  Klasse, und lies die Compiler-Meldung. Fehlermeldungen kennenzulernen, bevor
+  sie dir in der Klausur begegnen, ist halbe Punktesicherheit.</p>
+
+  <footer class="lesson-footer">
+    <nav>
+      <a href="0001-klassen-und-objekte.html">Zurück zu Lektion 1</a>
+      <a href="../reference/glossar-klassen-und-objekte.html">Glossar &amp; Klausur-Rezept</a>
+      <a href="../RESOURCES.md">Quellenliste</a>
+    </nav>
+    <p>Nächste Lektion (folgt): Methoden im Detail. Parameter, Rückgaben, getter und
+    setter, und warum Attribute privat bleiben sollten, auch wenn es umständlich wirkt.</p>
+  </footer>
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
+
