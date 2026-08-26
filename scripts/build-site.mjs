@@ -38,8 +38,10 @@ function dirsOf(absPath) {
     .sort((a, b) => a.localeCompare(b, 'de'));
 }
 
+const ACRONYMS = new Set(['oop', 'html', 'css', 'js', 'sql']);
 const slugLabel = (slug) => slug.split('-')
-  .map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  .map((w) => ACRONYMS.has(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))
+  .join(' ');
 
 /** <title> aus einer HTML-Datei lesen (erste 2 KB genügen) */
 function htmlTitle(absPath, fallback) {
