@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossar · Klassen und Objekte</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<article>
+  <p class="kicker">Java-OOP &middot; Nachschlagen</p>
+  <h1>Glossar: Klasse und Objekt</h1>
+
+  <p>Die Begriffe aus Lektion 1, so wie dieses Workspace sie benutzt. Ein Begriff steht
+  hier erst, wenn du ihn sicher verwenden kannst; neue kommen in jeder Lektion dazu.</p>
+
+  <h2>Begriffe</h2>
+
+  <table>
+    <thead><tr><th>Begriff</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Klasse</strong></td>
+          <td>Der Bauplan im Programmtext. Legt Attribute und Methoden fest, die ihre Objekte haben. Sie existiert einmal pro Programm.
+          <br><span class="term-note">Englisch als Randnotiz: class</span></td></tr>
+      <tr><td><strong>Objekt</strong></td>
+          <td>Ein konkretes Exemplar einer Klasse, erzeugt mit <code>new</code>. Trägt eigene Attributwerte und führt Methoden aus.
+          <br><span class="term-note">Auch: Instanz, Exemplar · engl.: object, instance</span></td></tr>
+      <tr><td><strong>Attribut</strong></td>
+          <td>Eine Zustandsvariable, die jedes Objekt einer Klasse für sich besitzt, z.&nbsp;B. <code>kontostand</code>.
+          <br><span class="term-note">Engl.: attribute, field</span></td></tr>
+      <tr><td><strong>Methode</strong></td>
+          <td>Eine Operation, die an einem Objekt aufgerufen wird und sein Verhalten darstellt, z.&nbsp;B. <code>einzahlen(50)</code>.
+          <br><span class="term-note">Engl.: method</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Klausur-Rezept: Objektzustände verfolgen</h2>
+  <ol class="steps">
+    <li>Jedes <code>new Konto(...)</code> notieren → neues Objekt, Startwerte eintragen.<span class="why">ein new = ein neues Exemplar</span></li>
+    <li>Jeden Methodenaufruf am richtigen Objekt anwenden: nur <code>k1.einzahlen(50)</code> ändert k1.<span class="why">Aufruf gilt nur fürs angesprochene Objekt</span></li>
+    <li>Am Ende Werte je Objekt ablesen, nicht je Klasse.<span class="why">Werte wohnen in Objekten</span></li>
+  </ol>
+
+  <footer class="lesson-footer">
+    <nav>
+      <a href="../lessons/0001-klassen-und-objekte.html">Zurück zu Lektion 1</a>
+      <a href="../RESOURCES.md">Quellenliste</a>
+    </nav>
+  </footer>
+</article>
+</body>
+</html>

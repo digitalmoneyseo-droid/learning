@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 1 · Klasse und Objekt</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<article>
+  <p class="kicker">Java-OOP &middot; Lektion 1</p>
+  <h1>Klasse und Objekt: der Bauplan und seine Exemplare</h1>
+
+  <p><strong>Warum diese Lektion?</strong> Dein LK hat mit der Objektorientierung
+  begonnen, und fast jede Klausuraufgabe der nächsten zwei Jahre fragt dasselbe in
+  Verkleidung: <em>Was ist die Klasse, was ist ein Objekt davon, und was weiß welches
+  Objekt wann?</em> Wer diese Unterscheidung sauber trifft, kann später Konstruktoren,
+  Geheimnisprinzip und Vererbung verstehen. Wer sie schwammig lässt, rutscht bei jeder
+  Folge-Thematik ins Raten.</p>
+
+  <h2>Zwei Blicke auf dieselbe Sache</h2>
+  <p>Nimm ein Girokonto im echten Leben. Es gibt genau einen <em>Vertragsbauplan</em>: so
+  sieht ein Konto bei deiner Bank aus, welche Daten es hat, was damit geht. Und es gibt
+  Millionen konkreter Konten, die alle nach diesem einen Plan laufen, jedes mit eigenem
+  Stand und eigenem Inhaber. Genau diese zwei Blicke heißen in Java:</p>
+
+  <div class="merk">
+    <span class="merk-label">Definition</span>
+    <p>Eine <strong>Klasse</strong> ist der Bauplan im Programmtext. Sie legt fest,
+    welche <strong>Attribute</strong> (Zustandsdaten) und welche
+    <strong>Methoden</strong> (Verhalten) ihre Objekte haben.</p>
+    <p style="margin-bottom:0;">Ein <strong>Objekt</strong> (auch: Instanz, Exemplar)
+    ist ein konkretes Exemplar, das zur Laufzeit mit <span class="math-inline">new</span>
+    erzeugt wird. Es besitzt eigene Attributwerte.
+    [<a href="https://docs.oracle.com/javase/tutorial/java/concepts/">Oracle, &bdquo;What Is a Class?&ldquo;</a>]</p>
+  </div>
+
+  <p>Die Metapher hat eine Grenze, die Klausuren gerne testen: der Bauplan selbst
+  tut nichts und hält nichts. Nur die erzeugten Objekte tragen Werte und führen
+  Methoden aus. Wer Sätze bildet wie „die Klasse Konto hat 150 Euro“, mischt die
+  beiden Blicke.</p>
+
+  <h2>Der Bauplan als Code: die Klasse Konto</h2>
+  <p>So sieht der Plan in Java aus. Schreib ihn einmal in den Java-Editor und führe
+  ihn aus, er läuft unverändert:</p>
+
+  <div class="codebox">
+    <span class="code-title">Konto.java</span>
+<pre><span class="kw">public class</span> <span class="ty">Konto</span> {
+
+    <span class="kw">private</span> <span class="ty">String</span> inhaber;
+    <span class="kw">private double</span> kontostand;
+
+    <span class="kw">public</span> <span class="ty">Konto</span>(<span class="ty">String</span> neuerInhaber, <span class="kw">double</span> startbetrag) {
+        inhaber = neuerInhaber;
+        kontostand = startbetrag;
+    }
+
+    <span class="kw">public void</span> einzahlen(<span class="kw">double</span> betrag) {
+        kontostand = kontostand + betrag;
+    }
+
+    <span class="kw">public void</span> abheben(<span class="kw">double</span> betrag) {
+        kontostand = kontostand - betrag;
+    }
+
+    <span class="kw">public</span> <span class="ty">String</span> getInhaber() { <span class="kw">return</span> inhaber; }
+    <span class="kw">public double</span> getKontostand() { <span class="kw">return</span> kontostand; }
+}</pre>
+  </div>
+
+  <p>Drei Bausteine zählen im Moment mehr als der Rest: Die Zeilen
+  <code>private String inhaber;</code> und <code>private double kontostand;</code>
+  sind die <strong>Attribute</strong>, der Speicherplatzplan für jedes spätere Objekt.
+  Der Block <code>Konto(...)</code> ist der <strong>Konstruktor</strong>, die
+  Anlaufstelle beim Erzeugen, er setzt die Startwerte. Und alles, was ein Konto
+  <em>tun</em> kann, steht als <strong>Methode</strong> darunter:
+  einzahlen, abheben, Werte abfragen. Was der Konstruktor genau macht und warum
+  <code>get...</code>-Methoden diesen Namen tragen, sind eigene Lektionen, dafür
+  brauchst du hier nur die Rollen.</p>
+
+  <h2>Vom Plan zum Ding: zwei Objekte erzeugen</h2>
+  <p>Der Plan allein rechnet noch nichts. Dieses Testprogramm erzeugt zwei Konten
+  und lässt sie sich unabhängig voneinander bewegen:</p>
+
+  <div class="codebox">
+    <span class="code-title">Kontotest.java</span>
+<pre><span class="kw">public class</span> <span class="ty">Kontotest</span> {
+
+    <span class="kw">public static void</span> main(<span class="ty">String</span>[] args) {
+        <span class="ty">Konto</span> k1 = <span class="kw">new</span> <span class="ty">Konto</span>(<span class="st">&quot;Mira&quot;</span>, 100);
+        <span class="ty">Konto</span> k2 = <span class="kw">new</span> <span class="ty">Konto</span>(<span class="st">&quot;Ben&quot;</span>, 50);
+
+        k1.einzahlen(50);
+
+        <span class="ty">System</span>.out.println(k1.getInhaber() + <span class="st">&quot;: &quot;</span> + k1.getKontostand());
+        <span class="ty">System</span>.out.println(k2.getInhaber() + <span class="st">&quot;: &quot;</span> + k2.getKontostand());
+    }
+}
+
+<span class="cm">// Ausgabe:  Mira: 150.0
+//           Ben: 50.0</span></pre>
+  </div>
+
+  <div class="example">
+    <span class="example-title">Schritt für Schritt: was passiert wann?</span>
+    <ul class="steps">
+      <li><code>new Konto("Mira", 100)</code> → Objekt 1 entsteht: inhaber=Mira, kontostand=100.0<span class="why">ein new = ein neues Exemplar</span></li>
+      <li><code>new Konto("Ben", 50)</code> → Objekt 2 entsteht: inhaber=Ben, kontostand=50.0<span class="why">vom selben Plan, eigener Zustand</span></li>
+      <li><code>k1.einzahlen(50)</code> → nur das Objekt hinter k1 rechnet: 100+50=150<span class="why">Aufruf gilt nur fürs angesprochene Objekt</span></li>
+      <li>k2 wurde nie angefasst: sein Kontostand bleibt 50.0<span class="why">Zustände wohnen getrennt</span></li>
+    </ul>
+  </div>
+
+  <div class="warnung">
+    <strong>Häufigster Klausurfehler:</strong> Klasse und Objekt in einem Satz
+    vermischen. „Die Klasse Konto hat gerade 150 Euro“ ist falsch, denn nur jedes
+    konkrete Objekt trägt Werte. Gleiches gilt umgekehrt für Aufrufe:
+    <code>k1.einzahlen(50)</code> geht, <code>Konto.einzahlen(50)</code> nicht,
+    weil einzahlen an einem Exemplar hängt, nicht am Bauplan.
+  </div>
+
+  <h2>Schnelltest</h2>
+  <p>Antworte aus dem Gedächtnis, ohne hochzuscrollen.</p>
+  <div class="quiz" data-quiz="lektion1"></div>
+
+  <script type="application/json" data-for="lektion1">
+  {
+    "title": "Schnelltest · Lektion 1",
+    "questions": [
+      {
+        "q": "Was ist die Klasse <code>Konto</code> im Programm?",
+        "options": [
+          "Der Bauplan: er legt Attribute und Methoden fest.",
+          "Ein Speicherobjekt: es hält Werte wie 150 fest.",
+          "Ein Startbefehl: er startet main bei jedem new."
+        ],
+        "correct": 0,
+        "explainOk": "Genau. Die Klasse steht einmal im Programmtext und beschreibt Attribute und Methoden ihrer Objekte.",
+        "explainErr": "Merk dir die Richtung: Der Text der Klasse liegt im Editor und erzeugt selbst nichts. Erst Objekte mit new speichern Werte oder starten etwas."
+      },
+      {
+        "q": "<code>k1 = new Konto(\"Mira\", 100); k2 = new Konto(\"Ben\", 50);<br>k1.einzahlen(50);</code><br>Welche Stände gelten am Ende?",
+        "options": [
+          "k1: 150, k2: 50",
+          "k1: 150, k2: 150",
+          "k1: 100, k2: 50",
+          "k1: 50, k2: 150"
+        ],
+        "correct": 0,
+        "explainOk": "k1 bekam 100 plus einzahlen(50), also 150. k2 startete bei 50 und wurde danach nie wieder angesprochen.",
+        "explainErr": "Verfolge pro Objekt: Wo startete es (Startwerte im Konstruktoraufruf), und welche Aufrufe erreichten genau dieses Objekt? Nur k1 bekam einzahlen(50)."
+      },
+      {
+        "q": "Warum ist der Satz „Die Klasse Konto hat gerade 150 Euro“ falsch?",
+        "options": [
+          "Weil nur jedes konkrete Objekt Werte trägt.",
+          "Weil Klassen nur Baupläne ohne Konto sind.",
+          "Weil Beträge nur per new entstehen können."
+        ],
+        "correct": 0,
+        "explainOk": "Zustandsdaten wie kontostand leben im Objekt. Die Klasse beschreibt nur, dass jedes Konto dieses Attribut haben wird.",
+        "explainErr": "Der Satz mischt die zwei Blicke: Plan gegen Exemplar. Werte wohnen immer im Exemplar, siehe Merkkasten oben."
+      }
+    ]
+  }
+  </script>
+
+  <h2>Weiterlernen</h2>
+  <p><strong>Primärquelle zum Vertiefen (10 Min):</strong> Die
+  <a href="https://docs.oracle.com/javase/tutorial/java/concepts/">Oracle-Java-Tutorials zu OOP-Konzepten</a>
+  definieren Klasse, Objekt und Vererbung so, wie auch deine Klausur es meint.
+  Deutschsprachig gibt es das Kapitel
+  <a href="https://de.wikibooks.org/wiki/Java_Standard#Objektorientierung">Objektorientierung im Wikibook Java Standard</a>.
+  Und probier zu Hause im <a href="https://javaeditor.org">Java-Editor</a> das interaktive
+  Objekt-Erzeugen aus (im BlueJ-Stil): Konten anlegen, Methoden anklicken, Zustände live sehen.</p>
+
+  <footer class="lesson-footer">
+    <nav>
+      <a href="../reference/glossar-klassen-und-objekte.html">Glossar &amp; Klausur-Rezept</a>
+      <a href="../RESOURCES.md">Quellenliste</a>
+    </nav>
+    <p>Nächste Lektion (folgt): Konstruktor und new im Detail. Warum es mehrere
+    Konstruktoren geben darf und was in der Anlaufstelle alles passieren kann.</p>
+  </footer>
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
+
+
+
