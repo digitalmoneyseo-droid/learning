@@ -1,0 +1,288 @@
+/* ============================================================
+   Integralrechnung-Kurs · Shared Stylesheet
+   Tufte-inspiriert: ruhige Typografie, Papierhintergrund,
+   druckfreundlich, keine externen Abhängigkeiten.
+   ============================================================ */
+
+:root {
+  --paper: #faf7f0;
+  --ink: #22211e;
+  --ink-soft: #55524a;
+  --accent: #8c3b2e;        /* Ziegelrot für Interaktion/Merkkästen */
+  --accent-dark: #6e2e24;
+  --ok: #2e6b45;
+  --ok-bg: #e8f2ea;
+  --err: #a03232;
+  --err-bg: #f8eaea;
+  --line: #d9d2c4;
+  --card: #fffdf8;
+  --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 17px; }
+
+body {
+  margin: 0;
+  padding: 3rem 1.25rem 5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.65;
+}
+
+article {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+/* ---------- Kopfzeile ---------- */
+
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 2.6rem 0 0.7rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 1.8rem 0 0.5rem;
+}
+
+p { margin: 0.7rem 0; }
+
+a { color: var(--accent-dark); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent); }
+
+strong { font-weight: 700; }
+
+/* ---------- Mathe ---------- */
+
+.math-inline {
+  font-family: var(--serif);
+  font-style: italic;
+  white-space: nowrap;
+}
+.math-inline sup, .math-inline sub { font-style: normal; }
+
+.math-block {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.15rem;
+  margin: 1.1rem 0;
+  padding: 0.55rem 0.75rem;
+}
+
+/* Gestapelte Brüche */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.15em;
+  font-style: normal;
+  line-height: 1.15;
+  font-size: 0.92em;
+}
+.frac .num { padding: 0 0.25em 0.08em; }
+.frac .den { border-top: 1px solid currentColor; padding: 0.08em 0.25em 0; }
+
+/* Integralzeichen mit Grenzen: ∫<sub>a</sub><sup>b</sup> */
+.int-limits sub, .int-limits sup { font-style: normal; font-family: var(--sans); font-size: 0.72em; }
+
+/* ---------- Kästen ---------- */
+
+.merk {
+  background: var(--card);
+  border-left: 3px solid var(--accent);
+  padding: 0.85rem 1.1rem;
+  margin: 1.3rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.merk .merk-label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.warnung {
+  background: var(--err-bg);
+  border-left: 3px solid var(--err);
+  padding: 0.85rem 1.1rem;
+  margin: 1.3rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.warnung strong:first-child { color: var(--err); }
+
+.example {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 1.4rem 0;
+}
+.example > .example-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+
+/* Rechnungsschritte untereinander */
+.steps { list-style: none; margin: 0.6rem 0; padding: 0; }
+.steps li {
+  padding: 0.28rem 0;
+  border-bottom: 1px dotted var(--line);
+}
+.steps li:last-child { border-bottom: none; }
+.steps .why {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  display: inline-block;
+  margin-left: 0.6em;
+}
+
+/* ---------- Tabellen ---------- */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+}
+th, td {
+  text-align: left;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+tbody tr:nth-child(odd) { background: rgba(255,255,255,0.55); }
+
+/* ---------- Quiz ---------- */
+
+.quiz {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.6rem 0;
+}
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.9rem;
+}
+.quiz-question {
+  font-size: 1.08rem;
+  margin-bottom: 0.9rem;
+}
+.quiz-options { display: grid; gap: 0.5rem; }
+.quiz-option {
+  font-family: var(--serif);
+  font-size: 1rem;
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.quiz-option:hover:not(:disabled) { border-color: var(--accent); }
+.quiz-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.quiz-option.is-correct { background: var(--ok-bg); border-color: var(--ok); }
+.quiz-option.is-wrong { background: var(--err-bg); border-color: var(--err); }
+.quiz-option:disabled { cursor: default; opacity: 0.92; }
+
+.quiz-feedback {
+  margin-top: 0.8rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: var(--ok-bg); border-left: 3px solid var(--ok); }
+.quiz-feedback.err { background: var(--err-bg); border-left: 3px solid var(--err); }
+
+.quiz-progress { letter-spacing: 0.05em; }
+.quiz-next {
+  font-family: var(--sans);
+  margin-top: 0.9rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: none;
+}
+.quiz-next.show { display: inline-block; }
+.quiz-next:hover { background: var(--accent-dark); }
+
+.quiz-summary { text-align: center; padding: 0.6rem 0 0.2rem; }
+.quiz-summary .score-line { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+/* ---------- Fußzeile ---------- */
+
+.lesson-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.lesson-footer nav { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+
+/* ---------- Druck ---------- */
+
+@media print {
+  body { background: #fff; padding: 0; font-size: 11pt; }
+  .quiz-next { display: none !important; }
+  .example, .merk, .warnung, .quiz { break-inside: avoid; }
+  a { color: inherit; }
+}

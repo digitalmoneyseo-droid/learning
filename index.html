@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lernpfade</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<style>
+  :root{--paper:#faf7f0;--ink:#22211e;--ink-soft:#55524a;--accent:#8c3b2e;
+        --accent-dark:#6e2e24;--line:#d9d2c4;--card:#fffdf8;
+        --serif:Georgia,'Iowan Old Style','Palatino Linotype',Palatino,'Times New Roman',serif;
+        --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;padding:3rem 1.25rem 5rem;background:var(--paper);color:var(--ink);
+       font-family:var(--serif);font-size:17px;line-height:1.65}
+  main,footer{max-width:66rem;margin-left:auto;margin-right:auto}
+  .kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+          color:var(--accent);margin-bottom:.4rem}
+  h1{font-size:2rem;line-height:1.2;margin:0 0 1.2rem;font-weight:700}
+  .intro{max-width:44rem;color:var(--ink-soft)}
+  h2.subject{font-size:1.3rem;margin:3rem 0 1rem;padding-top:.6rem;border-top:2px solid var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:1.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.15rem 1.3rem}
+  h3{margin:0;font-size:1.08rem}
+  .card-title{text-decoration:none;color:var(--ink)}
+  .card-title:hover{color:var(--accent-dark)}
+  .why{color:var(--ink-soft);font-size:.93rem;margin:.45rem 0 .8rem}
+  ol.lessons{list-style:none;margin:.2rem 0 .6rem;padding:0}
+  ol.lessons li{padding:.32rem 0;border-bottom:1px dotted var(--line);
+                display:flex;align-items:baseline;gap:.55rem}
+  ol.lessons li:last-child{border-bottom:none}
+  ol.lessons a{color:var(--accent-dark);text-decoration-thickness:1px;text-underline-offset:2px}
+  ol.lessons a:hover{color:var(--accent)}
+  .badge{font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+         color:var(--ink-soft);white-space:nowrap}
+  .ref-row,.meta-row{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);margin:.7rem 0 0}
+  .ref-row a,.meta-row a{color:var(--accent-dark);margin-left:.35rem}
+  .ref-label{letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+  .meta-count{background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:.05rem .6rem}
+  @media print{body{background:#fff;padding:0}}
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Selbstorganisiertes Lernen</p>
+  <h1>Lernpfade</h1>
+  <p class="intro">Kurze, in sich abgeschlossene Lektionen mit Quiz zum Sofort-Feedback –
+     entstanden als persönlicher Kursbegleiter und öffentlich dokumentiert.</p>
+
+  <h2 class="subject">Mathematik</h2>
+  <div class="grid">
+<section class="card">
+    <h3><a class="card-title" href="mathematik/integralrechnung/lessons/0001-stammfunktion-bilden.html">Integralrechnung</a></h3>
+    <p class="why">Der Nutzer besucht einen Universitäts-Mathekurs und will Integralrechnung sicher beherrschen, um Vorlesung, Übungsblätter und Klausur zu bestehen. Integrale sollen nicht nur rechenbar, sondern verständlich sein.</p>
+    
+      <ol class="lessons">
+        <li><span class="badge">Lektion 1</span><a href="mathematik/integralrechnung/lessons/0001-stammfunktion-bilden.html">Aufleiten: deine erste Stammfunktion</a></li>
+      </ol>
+    
+      <p class="ref-row"><span class="ref-label">Nachschlagen</span><a href="mathematik/integralrechnung/reference/grundintegrale.html">Grundintegrale &amp; Umform-Tricks</a></p>
+    <p class="meta-row"><span class="meta-count">1 Lektion</span>
+      <a href="mathematik/integralrechnung/RESOURCES.md">Ressourcen</a>
+      <a href="mathematik/integralrechnung/NOTES.md">Notizen</a>
+    </p>
+  </section>
+  </div>
+</main>
+<footer>Automatisch generiert am 26. August 2026 durch <code>scripts/build-site.mjs</code>.</footer>
+</body>
+</html>

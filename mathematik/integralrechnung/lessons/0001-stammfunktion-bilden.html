@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lektion 1 · Aufleiten: deine erste Stammfunktion</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<article>
+  <p class="kicker">Integralrechnung &middot; Lektion 1</p>
+  <h1>Aufleiten: deine erste Stammfunktion</h1>
+
+  <p><strong>Warum diese Lektion?</strong> In deinem Uni-Kurs beginnt <em>jede</em>
+  Integralsaufgabe – ob Flächeninhalt, Übungsblatt oder Klausur – mit demselben Schritt:
+  eine Funktion finden, deren Ableitung der gegebene Term ist. Das nennt man
+  <em>Stammfunktion bilden</em> oder <em>Aufleiten</em>. Nach dieser Lektion kannst du das für
+  Potenzen, Brüche und Wurzeln – und du hast dabei genau die Umformungen geübt, die du dir
+  selbst als schwächste Stelle benannt hast.</p>
+
+  <h2>Die Idee: Ableiten rückwärts</h2>
+  <p>Du kannst schon sicher ableiten. Aufleiten ist exakt der umgekehrte Weg. Frage nicht
+  „was ist die Ableitung von <span class="math-inline">x<sup>2</sup></span>?“, sondern:</p>
+
+  <div class="example">
+    <span class="example-title">Rückwärts denken</span>
+    <p style="margin-top:0;">Wer muss ich ableiten, um <span class="math-inline">x<sup>2</sup></span> zu bekommen?</p>
+    <p>Beim Ableiten ging der Exponent <strong>runter</strong> und vorne wurde <strong>multipliziert</strong>:
+       aus <span class="math-inline">x<sup>3</sup></span> wurde <span class="math-inline">3x<sup>2</sup></span>.</p>
+    <p>Rückwärts: Exponent <strong>+1</strong> (<span class="math-inline">2&nbsp;+&nbsp;1&nbsp;=&nbsp;3</span>)
+       und durch den neuen Exponenten <strong>teilen</strong>:
+       <span class="math-inline"><span class="frac"><span class="num">1</span><span class="den">3</span></span>x<sup>3</sup></span>.</p>
+    <p>Probe: <span class="math-inline">(⅓x<sup>3</sup>)′ = ⅓&middot;3x<sup>2</sup> = x<sup>2</sup></span> ✓</p>
+  </div>
+
+  <div class="merk">
+    <span class="merk-label">Definition</span>
+    Eine Funktion <span class="math-inline">F</span> heißt <strong>Stammfunktion</strong> von
+    <span class="math-inline">f</span>, wenn gilt:
+    <span class="math-block">F&thinsp;&prime;(x) = f(x)</span>
+    Man schreibt <span class="math-inline">∫&thinsp;f(x)&thinsp;dx = F(x) + C</span>.
+    Das <span class="math-inline">∫</span>-Zeichen bedeutet nur: „bilde eine Stammfunktion“.
+  </div>
+
+  <p><strong>Warum „+ C“?</strong> Weil Konstanten beim Ableiten zu 0 werden:
+     <span class="math-inline">⅓x<sup>3</sup></span>, <span class="math-inline">⅓x<sup>3</sup>&nbsp;+&nbsp;7</span>
+     und <span class="math-inline">⅓x<sup>3</sup>&nbsp;−&nbsp;100</span> haben alle die Ableitung
+     <span class="math-inline">x<sup>2</sup></span>. Es gibt also unendlich viele Stammfunktionen –
+     sie unterscheiden sich nur um eine Konstante <span class="math-inline">C</span>.
+     Ohne „+ C“ ist die Antwort in Klausuren falsch.</p>
+
+  <h2>Der Motor: die Potenzregel</h2>
+
+  <div class="merk">
+    <span class="merk-label">Potenzregel</span>
+    <span class="math-block">∫&thinsp;x<sup>n</sup>&thinsp;dx =
+      <span class="frac"><span class="num">x<sup>n+1</sup></span><span class="den">n+1</span></span> + C,
+      &nbsp;&nbsp;n &ne; &minus;1</span>
+    <strong>Erst</strong> Exponent um 1 erhöhen, <strong>dann</strong> durch den neuen Exponenten teilen,
+    <strong>immer</strong> + C dahinter.
+  </div>
+
+  <p>Die Regel gilt für <em>alle</em> Exponenten – auch negative und Brüche. Genau deshalb ist der
+  nächste Abschnitt dein wichtigster Werkzeugkasten.</p>
+
+  <h2>Dein Werkzeugkasten: Brüche &amp; Wurzeln in Potenzen</h2>
+
+  <p>Du hast gesagt: Terme mit <span class="math-inline">x</span>, Brüchen und Minus sind schwer
+  umzurechnen. Hier sind die drei Regeln, die fast alles abdecken – lerne sie wie Vokabeln:</p>
+
+  <table>
+    <thead>
+      <tr><th>Steht im Term</th><th>Schreibe als Potenz</th><th>Regel</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="math-inline">1/x<sup>n</sup></td><td class="math-inline">x<sup>&minus;n</sup></td><td>Zähler 1 &rarr; negativer Exponent</td></tr>
+      <tr><td class="math-inline">a/x<sup>n</sup></td><td class="math-inline">a&middot;x<sup>&minus;n</sup></td><td>Zahl bleibt als Faktor vorne</td></tr>
+      <tr><td class="math-inline">&#8730;x</td><td class="math-inline">x<sup>1/2</sup></td><td>Wurzel &rarr; Bruch-Exponent</td></tr>
+      <tr><td class="math-inline">&#8731;x</td><td class="math-inline">x<sup>1/3</sup></td><td>n-te Wurzel &rarr; Exponent 1/n</td></tr>
+      <tr><td class="math-inline">x</td><td class="math-inline">x<sup>1</sup></td><td>x hat still Exponent 1</td></tr>
+      <tr><td class="math-inline">7</td><td class="math-inline">7x<sup>0</sup></td><td>Zahl = Zahl mal x hoch 0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warnung">
+    <strong>Häufigster Fehler:</strong> <span class="math-inline">1/x<sup>2</sup></span> direkt mit der
+    Potenzregel behandeln wollen. Erst umschreiben in <span class="math-inline">x<sup>&minus;2</sup></span>,
+    <em>dann</em> integrieren. Umformung kommt immer vor Regel.
+  </div>
+
+  <h2>Komplettes Beispiel, jeder Schritt einzeln</h2>
+
+  <div class="example">
+    <span class="example-title">Aufgabe</span>
+    <p>Bilde die Stammfunktion von
+       <span class="math-block">f(x) = <span class="frac"><span class="num">4</span><span class="den">x<sup>2</sup></span></span> &minus; &#8730;x + 3</span>
+    </p>
+
+    <span class="example-title">Schritt 1 · Alles in Potenzen umschreiben</span>
+    <ul class="steps">
+      <li><span class="math-inline"><span class="frac"><span class="num">4</span><span class="den">x<sup>2</sup></span></span> = 4x<sup>&minus;2</sup></span><span class="why">Zähler 1-artig &rarr; negativer Exponent</span></li>
+      <li><span class="math-inline">&#8730;x = x<sup>1/2</sup></span><span class="why">Wurzel &rarr; Bruch-Exponent</span></li>
+      <li><span class="math-inline">3 = 3x<sup>0</sup></span><span class="why">Zahl &rarr; Faktor mal x hoch 0</span></li>
+    </ul>
+
+    <span class="example-title">Schritt 2 · Gliedweise integrieren</span>
+    <ul class="steps">
+      <li><span class="math-inline">∫4x<sup>&minus;2</sup>dx = 4 &middot; <span class="frac"><span class="num">x<sup>&minus;1</sup></span><span class="den">&minus;1</span></span> = &minus;4x<sup>&minus;1</sup></span><span class="why">&minus;2 + 1 = &minus;1; durch &minus;1 teilen</span></li>
+      <li><span class="math-inline">∫x<sup>1/2</sup>dx = <span class="frac"><span class="num">x<sup>3/2</sup></span><span class="den">3/2</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span>x<sup>3/2</sup></span><span class="why">durch 3/2 teilen = mal 2/3</span></li>
+      <li><span class="math-inline">∫3&middot;x<sup>0</sup>dx = 3 &middot; <span class="frac"><span class="num">x<sup>1</sup></span><span class="den">1</span></span> = 3x</span><span class="why">0 + 1 = 1</span></li>
+    </ul>
+
+    <span class="example-title">Schritt 3 · Ergebnis + Probe</span>
+    <p><span class="math-block">F(x) = &minus;<span class="frac"><span class="num">4</span><span class="den">x</span></span> +
+       <span class="frac"><span class="num">2</span><span class="den">3</span></span>x<sup>3/2</sup> + 3x + C</span></p>
+    <p>Probe durch Zurückableiten (das machst du ab jetzt bei <em>jeder</em> Aufgabe):
+       <span class="math-inline">(&minus;4x<sup>&minus;1</sup>)&prime; = &minus;4&middot;(&minus;1)x<sup>&minus;2</sup> = 4x<sup>&minus;2</sup> ✓</span>,
+       <span class="math-inline">((2/3)x<sup>3/2</sup>)&prime; = (2/3)&middot;(3/2)x<sup>1/2</sup> = x<sup>1/2</sup> ✓</span>,
+       <span class="math-inline">(3x)&prime; = 3 ✓</span></p>
+  </div>
+
+  <h2>Schnelltest</h2>
+  <p>Antworte aus dem Gedächtnis, ohne hochzuscrollen – das Abrufen aus dem Kopf ist es, was das
+  Gelernte langfristig speichert.</p>
+  <div class="quiz" data-quiz="lektion1"></div>
+
+  <script type="application/json" data-for="lektion1">
+  {
+    "title": "Schnelltest \u00B7 Lektion 1",
+    "questions": [
+      {
+        "q": "\u222B\u2009x<sup>4</sup>\u2009dx = ?",
+        "options": [
+          "<span class='math-inline'><span class='frac'><span class='num'>x<sup>5</sup></span><span class='den'>5</span></span> + C</span>",
+          "<span class='math-inline'>5x<sup>4</sup> + C</span>",
+          "<span class='math-inline'>x<sup>5</sup> + C</span>",
+          "<span class='math-inline'><span class='frac'><span class='num'>x<sup>5</sup></span><span class='den'>4</span></span> + C</span>"
+        ],
+        "correct": 0,
+        "explainOk": "Exponent 4 + 1 = 5, dann durch den neuen Exponenten 5 teilen.",
+        "explainErr": "Reihenfolge merken: erst Exponent um 1 erhöhen, dann durch diesen <em>neuen</em> Exponenten teilen (nicht mit dem alten multiplizieren)."
+      },
+      {
+        "q": "\u222B\u2009<span class='math-inline'>1/x<sup>2</sup></span>\u2009dx = ?",
+        "options": [
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>1</span><span class='den'>x</span></span> + C</span>",
+          "<span class='math-inline'><span class='frac'><span class='num'>1</span><span class='den'>x</span></span> + C</span>",
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>2</span><span class='den'>x<sup>3</sup></span></span> + C</span>",
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>1</span><span class='den'>x<sup>3</sup></span></span> + C</span>"
+        ],
+        "correct": 0,
+        "explainOk": "1/x\u00B2 = x^\u22122 schreiben, dann \u22122 + 1 = \u22121 und durch \u22121 teilen: x^\u22121/(\u22121) = \u22121/x.",
+        "explainErr": "Der Knackpunkt war vermutlich die Umformung: erst 1/x\u00B2 = x^\u22122 aufschreiben, <em>dann</em> die Potenzregel anwenden. Das Minus im Exponenten wandert sp\u00E4ter ins Ergebnis."
+      },
+      {
+        "q": "\u222B\u2009<span class='math-inline'>\u221Ax</span>\u2009dx = ?",
+        "options": [
+          "<span class='math-inline'><span class='frac'><span class='num'>2</span><span class='den'>3</span></span>x<sup>3/2</sup> + C</span>",
+          "<span class='math-inline'><span class='frac'><span class='num'>3</span><span class='den'>2</span></span>x<sup>3/2</sup> + C</span>",
+          "<span class='math-inline'><span class='frac'><span class='num'>1</span><span class='den'>2</span></span>x<sup>&minus;1/2</sup> + C</span>",
+          "<span class='math-inline'>x<sup>3/2</sup> + C</span>"
+        ],
+        "correct": 0,
+        "explainOk": "\u221Ax = x^(1/2); neuer Exponent 3/2, geteilt durch 3/2 hei\u00DFt mal 2/3.",
+        "explainErr": "\u00DCbrigens: Option mit x^\u22121/2 ist die <em>Ableitung</em> von \u221Ax \u2013 ein guter Trick ist, jede Antwort kurz zur\u00FCckzuleiten und zu pr\u00FCfen, ob wieder \u221Ax rauskommt."
+      },
+      {
+        "q": "\u222B\u2009(3x<sup>2</sup> \u2212 4x + 5)\u2009dx = ?",
+        "options": [
+          "<span class='math-inline'>x<sup>3</sup> &minus; 2x<sup>2</sup> + 5x + C</span>",
+          "<span class='math-inline'>3x<sup>3</sup> &minus; 4x<sup>2</sup> + 5x + C</span>",
+          "<span class='math-inline'>x<sup>3</sup> &minus; 2x<sup>2</sup> + 5 + C</span>",
+          "<span class='math-inline'>x<sup>3</sup> &minus; 2x<sup>2</sup> + 5x</span>"
+        ],
+        "correct": 0,
+        "explainOk": "Gliedweise integrieren: Faktoren 3 und \u22124 bleiben vorne stehen (und k\u00FCrzen sich weg), die Konstante 5 wird zu 5x, plus C.",
+        "explainErr": "Drei Dinge gleichzeitig: Summen gehen gliedweise, Zahlen vor x bleiben als Faktor stehen und werden mit dem neuen Exponenten geteilt, und die Konstante 5 wird zu 5x \u2013 plus das +C am Ende."
+      },
+      {
+        "q": "\u222B\u2009<span class='math-inline'><span class='frac'><span class='num'>6</span><span class='den'>x<sup>3</sup></span></span></span>\u2009dx = ?",
+        "options": [
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>3</span><span class='den'>x<sup>2</sup></span></span> + C</span>",
+          "<span class='math-inline'><span class='frac'><span class='num'>3</span><span class='den'>x<sup>2</sup></span></span> + C</span>",
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>18</span><span class='den'>x<sup>4</sup></span></span> + C</span>",
+          "<span class='math-inline'>&minus;<span class='frac'><span class='num'>6</span><span class='den'>x<sup>2</sup></span></span> + C</span>"
+        ],
+        "correct": 0,
+        "explainOk": "6x^\u22123 \u2192 Exponent \u22122, Koeffizient 6 : (\u22122) = \u22123, also \u22123x^\u22122 = \u22123/x\u00B2.",
+        "explainErr": "Erst 6/x\u00B3 = 6x^\u22123 schreiben. Dann Exponent \u22123+1=\u22122 und den Vorfaktor durch den neuen Exponenten teilen: 6:(\u22122) = \u22123. (Option mit x\u2074 w\u00E4re abgeleitet statt aufgeleitet.)"
+      },
+      {
+        "q": "Warum geh\u00F6rt zu jeder Stammfunktion ein \u201E+ C\u201C?",
+        "options": [
+          "Weil jede Konstante beim Ableiten verschwindet.",
+          "Weil jede Konstante beim Ableiten w\u00E4chst.",
+          "Weil jede Stammfunktion beim Ableiten schrumpft.",
+          "Weil jedes Integral beim Ableiten verschwindet."
+        ],
+        "correct": 0,
+        "explainOk": "Die Ableitung von C ist 0 \u2013 alle Funktionen F(x)+C haben dieselbe Ableitung f(x), also sind alle gleichberechtigte Stammfunktionen.",
+        "explainErr": "Tipp: Leite F(x)+C einmal ab \u2013 was passiert mit dem C? Genau deshalb kann jede Konstante dahinterstehen."
+      }
+    ]
+  }
+  </script>
+
+  <h2>Weiterlernen</h2>
+  <p><strong>Primärquelle zum Vertiefen (10 Min):</strong> Der Artikel
+  <a href="https://de.serlo.org/mathe/1595/das-integral">„Das Integral“ auf Serlo</a> – freie,
+  gemeinnützige Lernplattform mit Übungsaufgaben. Wenn du lieber zusiehst: das Video
+  <a href="https://www.youtube.com/watch?v=0vdcvDg-Lkk">„Integralrechnung einfach erklärt“ von MathemaTrick</a>
+  rechnet genau diese Schritte an Beispielen vor.</p>
+
+  <div class="merk">
+    <span class="merk-label">Frag deinen Tutor</span>
+    Du sitzt gerade mit mir an einem Tisch: Wenn irgendwo ein Schritt hakt – etwa warum
+    <span class="math-inline">x<sup>&minus;2</sup> : (&minus;1)</span> ein Minus liefert – frag einfach
+    nach. Ich erkläre jeden Umformungsschritt so oft, bis er sitzt.
+  </div>
+
+  <footer class="lesson-footer">
+    <nav>
+      <a href="../reference/grundintegrale.html">Spickzettel: Grundintegrale &amp; Umform-Tricks</a>
+      <a href="../RESOURCES.md">Quellenliste</a>
+    </nav>
+    <p>Nächste Lektion (folgt): das bestimmte Integral und der Hauptsatz der Differential- und
+    Integralrechnung – damit wird aus der Stammfunktion eine Fläche.</p>
+  </footer>
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
